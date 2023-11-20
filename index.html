@@ -1,44 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>WASD Sequence Test</title>
-  <style>
-    /* Add your CSS styles for the interface here */
-  </style>
+    <meta charset="UTF-8">
+    <title>WASD Sequence Test</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="sequenceDisplay"></div>
-  <input type="text" id="userInput" autofocus>
-  <button onclick="submitSequence()">Submit</button>
+    <div class="container">
+        <h1>WASD Sequence Test</h1>
+        <p id="sequence">Sequence to press:</p>
+        <input type="text" id="userInput" autofocus>
+        <p id="timeTaken"></p>
+    </div>
 
-  <script>
-    function generateSequence(length) {
-      const keys = ['W', 'A', 'S', 'D'];
-      let sequence = '';
-      for (let i = 0; i < length; i++) {
-        sequence += keys[Math.floor(Math.random() * keys.length)];
-      }
-      return sequence;
-    }
-
-    function displayNewSequence() {
-      const sequenceLength = 4; // Change the sequence length here
-      const newSequence = generateSequence(sequenceLength);
-      document.getElementById('sequenceDisplay').innerText = `Your sequence to press: ${newSequence}`;
-      document.getElementById('userInput').value = '';
-      document.getElementById('userInput').focus();
-    }
-
-    function submitSequence() {
-      const userInput = document.getElementById('userInput').value.toUpperCase();
-      // You can add logic here to check userInput against the generated sequence
-      // For this simplified version, let's just display a message
-      alert('Time taken: Calculated time'); // Replace with time calculation logic
-      displayNewSequence();
-    }
-
-    // Call displayNewSequence when the page loads to get the first sequence
-    window.onload = displayNewSequence();
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
