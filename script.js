@@ -1,6 +1,7 @@
 let sequences = [];
 let currentIndex = 0;
 let startTime;
+let activeUsers = 0;
 
 function generateSequence() {
     const keys = ['W', 'A', 'S', 'D'];
@@ -37,6 +38,22 @@ function checkInput(e) {
         document.getElementById('userInput').value = ''; // Clears the input field on wrong key press
     }
 }
+
+function updateActiveUsers() {
+    document.getElementById('activeUsers').textContent = activeUsers;
+}
+
+// Increment active users count when page loads
+window.onload = function() {
+    activeUsers++;
+    updateActiveUsers();
+};
+
+// Decrement active users count when page unloads
+window.onbeforeunload = function() {
+    activeUsers--;
+    updateActiveUsers();
+};
 
 displaySequence();
 document.getElementById('userInput').addEventListener('keydown', checkInput);
