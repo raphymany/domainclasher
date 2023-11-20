@@ -1,7 +1,7 @@
 let sequences = [];
 let currentIndex = 0;
 let startTime;
- 
+
 function generateSequence() {
     const keys = ['W', 'A', 'S', 'D'];
     let sequence = '';
@@ -15,21 +15,28 @@ function displaySequence() {
     let sequence = generateSequence();
     document.getElementById('sequence').textContent = `Sequence to press: ${sequence}`;
     sequences.push({ sequence: sequence, startTime: Date.now() });
-    currentIndex++;
+    document.getElementById('userInput').value = ''; // Clears the input field for a new sequence
+    currentIndex = 0;
+    startTime = Date.now();
 }
 
 function checkInput(e) {
-    if (e.key.toUpperCase() === sequences[currentIndex - 1].sequence.charAt(currentIndex - 1)) {
-        if (currentIndex === sequences[currentIndex - 1].sequence.length) {
+    let userSequence = sequences[sequences.length - 1].sequence;
+
+    if (e.key.toUpperCase() === userSequence[currentIndex]) {
+        currentIndex++;
+
+        if (currentIndex === userSequence.length) {
             let endTime = Date.now();
-            let timeTaken = (endTime - sequences[currentIndex - 1].startTime) / 1000;
+            let timeTaken = (endTime - startTime) / 1000;
             document.getElementById('timeTaken').textContent = `Time taken: ${timeTaken.toFixed(2)} seconds`;
             setTimeout(displaySequence, 1000);
         }
     } else {
-        document.getElementById('userInput').value = '';
+        e.preventDefault(); // Prevents the default behavior of the keypress
+        document.getElementById('userInput').value = ''; // Clears the input field on wrong key press
     }
 }
 
 displaySequence();
-document.getElementById('userInput').addEventListener('keyup', checkInput);
+document.getElementById('userInput').addEventListener('keydown', checkInput);
