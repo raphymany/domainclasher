@@ -1,7 +1,7 @@
 let sequences = [];
 let currentIndex = 0;
 let startTime;
-
+ 
 function generateSequence() {
     const keys = ['W', 'A', 'S', 'D'];
     let sequence = '';
